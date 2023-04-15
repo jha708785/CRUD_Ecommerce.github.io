@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="ISO-8859-1">
+<title>Edit Book</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<style>
+	.navbar {
+	background-color: aquamarine;
+	padding-top: 12px;
+	padding-bottom: 10px;
+	}
+	.s {
+	font-size: larger;
+	font-weight: 600;
+}
+.book {
+	font-size: 28px;
+	font-weight: bold;
+}
+</style>
+
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand book" href="#">Book Store</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link s active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link s" href="addbook">Add Book</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link s" href="viewBook">View Book</a>
+        </li>
+        
+    </div>
+  </div>
+</nav>
+
+
+
+
+<div class="container-fluid  p-5">
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+					<div class="card paint-card">
+						<div class="card-body">
+							<h4 class="form-signin-heading text-center">Edit Book</h4>
+							
+							<div th:if="${session.succMsg}" class="text-center">
+									<p class="text-success fs-3" th:text="${session.succMsg}"></p>
+									<th:block th:text="${#session.removeAttribute('succMsg')}"></th:block>
+								</div>
+
+								<div th:if="${session.errorMsg}" class="text-center">
+									<p class="text-danger fs-3" th:text="${session.errorMsg}"></p>
+									<th:block th:text="${#session.removeAttribute('errorMsg')}"></th:block>
+								</div>
+							<form class="form-signin" method="post" th:action="@{/updateBook}" enctype="multipart/form-data">
+
+								<input type="hidden" name="id" th:value="${book.id}">
+								<div class="mb-3">
+									<label for="exampleInputEmail1" class="form-label">
+										Book Name</label> <input type="text" class="form-control" required
+										name="bookName" th:value="${book.bookName}">
+
+								</div>
+
+								<div class="mb-3">
+									<label for="exampleInputEmail1" class="form-label">
+										Author</label> <input type="text" class="form-control" required
+										name="author" th:value="${book.author}">
+
+								</div>
+
+								<div class="mb-3">
+									<label for="exampleInputEmail1" class="form-label">
+										Description</label>
+									<textarea rows="3" cols="" class="form-control"
+										name="description">[[${book.description}]]</textarea>
+
+								</div>
+
+
+								
+							
+
+								<div class="mb-3">
+									<label for="exampleInputEmail1" class="form-label">
+										ISBN No</label> <input type="text" class="form-control" required
+										name="isbnNo" th:value="${book.isbnNo}">
+
+								</div>
+
+								<div class="mb-3">
+									<label for="exampleInputEmail1" class="form-label">
+										Price</label> <input type="number" class="form-control" required
+										name="price" th:value="${book.price}">
+								</div>
+
+								<div class="mb-3">
+									<label for="exampleInputEmail1" class="form-label">
+										Image</label> <input type="file" class="form-control" required
+										name="img">
+
+                                  <div class="mt-2">
+									<img alt="" th:src="@{'../imgs/'+${book.imgName}}" width="70px" height="70px">
+									<strong>uploaded Img: [[${book.imgName}]]</strong>
+									</div>
+								</div>
+
+
+								<button class="btn btn-success text-white col-md-12" type="submit">Submit
+								</button>
+
+								<div class="text-center p-3"></div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+
+
+				
+
+			</div>
+		</div>
+
+
+	
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+</body>
+</html>
